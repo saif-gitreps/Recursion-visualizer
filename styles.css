@@ -41,3 +41,15 @@ h3 {
    color: wheat;
    border: none;
 }
+
+#simulate-button {
+   display: none;
+   border: 2px solid black;
+   padding: 0.5rem;
+   border-radius: 8px;
+}
+
+#simulate-button:hover {
+   background-color: rgb(251, 216, 140);
+   cursor: pointer;
+}
