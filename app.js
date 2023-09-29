@@ -36,4 +36,36 @@ enterButton.addEventListener("click", () => {
    heightValue = reduceHeight(heightValue);
    grid.style.width = widthValue + "rem";
    grid.style.height = heightValue + "rem";
+
+   simulateButton.style.display = "block";
+});
+
+function kev(m, n, row, col) {
+   if (m == row && n == col) {
+      return;
+   }
+   if (m < row) {
+      m += 1;
+      const blockElement = document.createElement("div");
+      blockElement.style.gridRowStart = m;
+      blockElement.style.gridColumnStart = n;
+      blockElement.classList.add("block");
+      grid.appendChild(blockElement);
+      kev(m, n, row, col);
+      m -= 1;
+   }
+   if (n < col) {
+      n += 1;
+      const blockElement = document.createElement("div");
+      blockElement.style.gridRowStart = m;
+      blockElement.style.gridColumnStart = n;
+      blockElement.classList.add("block");
+      grid.appendChild(blockElement);
+      kev(m, n, row, col);
+      n -= 1;
+   }
+}
+
+simulateButton.addEventListener("click", () => {
+   kev(1, 1, rowValue, colValue);
 });
