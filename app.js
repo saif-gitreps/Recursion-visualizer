@@ -4,11 +4,12 @@ const enterButton = document.getElementById("enter-button");
 const grid = document.querySelector("main ul");
 const simulateButton = document.getElementById("simulate-button");
 
-let rowValue;
-let colValue;
+let rowValue = rowInput.value;
+let colValue = colInput.value;
+console.dir(grid);
 enterButton.addEventListener("click", () => {
-   rowValue = rowInput.value;
-   colValue = colInput.value;
+   rowValue = parseInt(rowInput.value);
+   colValue = parseInt(colInput.value);
+   grid.style.gridTemplateRows = "repeat(" + rowValue + ", 1fr)";
+   grid.style.gridTemplateColumns = "repeat(" + colValue + ", 1fr)";
 });
-
-console.log(rowValue);

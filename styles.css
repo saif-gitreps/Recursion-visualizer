@@ -42,6 +42,14 @@ h3 {
    border: none;
 }
 
+main ul {
+   display: grid;
+   width: 30rem;
+   height: 30rem;
+   padding: 0;
+   border: 3px solid brown;
+}
+
 #simulate-button {
    display: none;
    border: 2px solid black;
