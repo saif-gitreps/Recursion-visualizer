@@ -59,6 +59,7 @@ main ul {
    background-color: black;
    border: 2px solid black;
    border-radius: 5px;
+   box-sizing: border-box;
 }
 
 #simulate-button {
