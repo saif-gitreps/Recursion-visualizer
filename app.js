@@ -41,10 +41,12 @@ function initialBlock() {
    firstBlockElement.style.gridRowStart = 1;
    firstBlockElement.style.gridColumnStart = 1;
    firstBlockElement.classList.add("block");
+   firstBlockElement.style.backgroundColor = "green";
    grid.appendChild(firstBlockElement);
 }
 
 enterButton.addEventListener("click", () => {
+   directionInfo = [];
    rowValue = parseInt(rowInput.value);
    colValue = parseInt(colInput.value);
    gridSizeAdjustment(rowValue, colValue);
@@ -74,34 +76,37 @@ function kev(m, n, row, col) {
 
 function draw() {
    for (let i = 0; i < directionInfo.length; i++) {
-      if (directionInfo[i].direction == "down" || directionInfo[i].direction == "right") {
-         const block = document.createElement("div");
-         block.style.gridRowStart = directionInfo[i].row;
-         block.style.gridColumnStart = directionInfo[i].col;
-         block.classList.add("block");
-         grid.appendChild(block);
-      } else if (directionInfo[i].direction === "left" || directionInfo[i].direction === "up") {
-         const rowToFind = directionInfo[i].row;
-         const colToFind = directionInfo[i].col;
-         console.log(`Searching for row ${rowToFind}, col ${colToFind}`);
-         const blockToDelete = grid.querySelector(
-            `.block[style*="grid-row-start: ${rowToFind}; grid-column-start: ${colToFind};"]`
-         );
-         console.log(blockToDelete);
-         if (blockToDelete) {
-            blockToDelete.classList.remove("block");
-            grid.removeChild(blockToDelete);
+      setTimeout(() => {
+         if (directionInfo[i].direction == "down" || directionInfo[i].direction == "right") {
+            const block = document.createElement("div");
+            block.style.gridRowStart = directionInfo[i].row;
+            block.style.gridColumnStart = directionInfo[i].col;
+            block.classList.add("block");
+            if (directionInfo[i].row == rowValue && directionInfo[i].col == colValue) {
+               block.style.backgroundColor = "#ADD8E6";
+            }
+            grid.appendChild(block);
+         } else if (directionInfo[i].direction === "left" || directionInfo[i].direction === "up") {
+            const rowToFind = directionInfo[i].row;
+            const colToFind = directionInfo[i].col;
+            const blockToDelete = grid.querySelector(
+               `.block[style*="grid-row-start: ${rowToFind}; grid-column-start: ${colToFind};"]`
+            );
+            if (blockToDelete) {
+               blockToDelete.classList.remove("block");
+               grid.removeChild(blockToDelete);
+            }
          }
-      }
+      }, 200 * (i + 1));
    }
 }
 
 simulateButton.addEventListener("click", () => {
-   grid.removeChild(firstBlockElement);
    kev(1, 1, rowValue, colValue);
    // for debugging purposes.
    for (let i = 0; i < directionInfo.length; i++) {
       console.log(directionInfo[i]);
    }
    draw();
+   simulateButton.style.display = "none";
 });
