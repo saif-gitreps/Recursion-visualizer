@@ -22,6 +22,9 @@ class Stack {
    top() {
       return this.stack[this.stack.length - 1];
    }
+   stackLength() {
+      return this.stack.length;
+   }
    empty() {
       return this.stack.length == 0;
    }
@@ -69,29 +72,41 @@ enterButton.addEventListener("click", () => {
    simulateButton.style.display = "block";
 });
 
+let ourStack = new Stack();
+
 function kev(m, n, row, col) {
    if (m == row && n == col) {
+      ourStack.push({ direction: "reached", row: m, col: n });
       return;
    }
    if (m < row) {
       m += 1;
-      console.log("right");
+      console.log("down");
+      ourStack.push({ direction: "down", row: m, col: n });
       kev(m, n, row, col);
-      console.log("left");
+      console.log("up");
       m -= 1;
+      ourStack.push({ direction: "up", row: m, col: n });
    }
    if (n < col) {
       n += 1;
-      console.log("down");
+      console.log("right");
+      ourStack.push({ direction: "right", row: m, col: n });
       kev(m, n, row, col);
-      console.log("up");
+      console.log("left");
       n -= 1;
+      ourStack.push({ direction: "left", row: m, col: n });
    }
 }
 
 simulateButton.addEventListener("click", () => {
    grid.removeChild(firstBlockElement);
    kev(1, 1, rowValue, colValue);
+
+   while (ourStack.empty() == false) {
+      console.log(ourStack.top());
+      ourStack.pop();
+   }
 });
 
 //PERFECT TIME1 =  UP:{800(INNER CLOCK),100}  {DOWN:800(INNER CLOCK),1400}.
