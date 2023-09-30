@@ -62,7 +62,8 @@ main ul {
    box-sizing: border-box;
 }
 
-footer {
+footer,
+#disclaimer {
    display: flex;
    flex-direction: column;
    justify-content: center;
@@ -82,13 +83,18 @@ footer {
    background-color: brown;
    cursor: pointer;
 }
-
+#path-counter {
+   display: none;
+   justify-content: center;
+   align-items: center;
+}
 .block {
    background-color: brown;
    border: 2px solid black;
 }
 
 #disclaimer {
+   margin-top: 5rem;
    width: 50rem;
    border: 4px solid black;
    padding: 1rem;

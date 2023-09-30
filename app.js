@@ -4,6 +4,8 @@ const enterButton = document.getElementById("enter-button");
 const grid = document.querySelector("main ul");
 const simulateButton = document.getElementById("simulate-button");
 const firstBlockElement = document.createElement("div");
+const counterDiv = document.getElementById("path-counter");
+const pathCounter = document.querySelector("#path-counter .boxes");
 
 let rowValue = rowInput.value;
 let colValue = colInput.value;
@@ -54,8 +56,12 @@ enterButton.addEventListener("click", () => {
    simulateButton.style.display = "block";
 });
 
+let ans = 0;
+
 function kev(m, n, row, col) {
    if (m == row && n == col) {
+      ans++;
+      directionInfo.push({ direction: "reached", row: m, col: n });
       return;
    }
    if (m < row) {
@@ -75,8 +81,13 @@ function kev(m, n, row, col) {
 }
 
 function draw() {
+   let pathCountVariable = 1;
    for (let i = 0; i < directionInfo.length; i++) {
       setTimeout(() => {
+         if (directionInfo[i].direction == "reached" || ans > 0) {
+            pathCounter.value = pathCountVariable++;
+            ans--;
+         }
          if (directionInfo[i].direction == "down" || directionInfo[i].direction == "right") {
             const block = document.createElement("div");
             block.style.gridRowStart = directionInfo[i].row;
@@ -103,6 +114,7 @@ function draw() {
 
 simulateButton.addEventListener("click", () => {
    kev(1, 1, rowValue, colValue);
+   counterDiv.style.display = "flex";
    // for debugging purposes.
    for (let i = 0; i < directionInfo.length; i++) {
       console.log(directionInfo[i]);
