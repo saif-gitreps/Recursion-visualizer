@@ -8,27 +8,7 @@ const firstBlockElement = document.createElement("div");
 let rowValue = rowInput.value;
 let colValue = colInput.value;
 
-class Stack {
-   constructor() {
-      this.stack = [];
-   }
-   push(item) {
-      this.stack.push(item);
-   }
-   pop() {
-      if (this.stack.length == 0) return;
-      this.stack.pop();
-   }
-   top() {
-      return this.stack[this.stack.length - 1];
-   }
-   stackLength() {
-      return this.stack.length;
-   }
-   empty() {
-      return this.stack.length == 0;
-   }
-}
+let directionInfo = [];
 
 function reduceWidth(width) {
    if (width > 45 && width < 60) {
@@ -72,42 +52,32 @@ enterButton.addEventListener("click", () => {
    simulateButton.style.display = "block";
 });
 
-let ourStack = new Stack();
-
 function kev(m, n, row, col) {
    if (m == row && n == col) {
-      ourStack.push({ direction: "reached", row: m, col: n });
+      directionInfo.push({ direction: "reached", row: m, col: n });
       return;
    }
    if (m < row) {
       m += 1;
-      console.log("down");
-      ourStack.push({ direction: "down", row: m, col: n });
+      directionInfo.push({ direction: "down", row: m, col: n });
       kev(m, n, row, col);
-      console.log("up");
       m -= 1;
-      ourStack.push({ direction: "up", row: m, col: n });
+      directionInfo.push({ direction: "up", row: m, col: n });
    }
    if (n < col) {
       n += 1;
-      console.log("right");
-      ourStack.push({ direction: "right", row: m, col: n });
+      directionInfo.push({ direction: "right", row: m, col: n });
       kev(m, n, row, col);
-      console.log("left");
       n -= 1;
-      ourStack.push({ direction: "left", row: m, col: n });
+      directionInfo.push({ direction: "left", row: m, col: n });
    }
 }
 
 simulateButton.addEventListener("click", () => {
    grid.removeChild(firstBlockElement);
    kev(1, 1, rowValue, colValue);
-
-   while (ourStack.empty() == false) {
-      console.log(ourStack.top());
-      ourStack.pop();
+   // for debugging purposes.
+   for (let i = 0; i < directionInfo.length; i++) {
+      console.log(directionInfo[i]);
    }
 });
-
-//PERFECT TIME1 =  UP:{800(INNER CLOCK),100}  {DOWN:800(INNER CLOCK),1400}.
-//PERFECT TIME1 =  UP:{1000(INNER CLOCK),200}  {DOWN:1000(INNER CLOCK),200}.
