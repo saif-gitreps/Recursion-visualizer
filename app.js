@@ -49,6 +49,7 @@ function initialBlock() {
 
 enterButton.addEventListener("click", () => {
    directionInfo = [];
+   pathCounter.value = 0;
    rowValue = parseInt(rowInput.value);
    colValue = parseInt(colInput.value);
    gridSizeAdjustment(rowValue, colValue);
@@ -61,7 +62,7 @@ let ans = 0;
 function kev(m, n, row, col) {
    if (m == row && n == col) {
       ans++;
-      directionInfo.push({ direction: "reached", row: m, col: n });
+      // directionInfo.push({ direction: "reached", row: m, col: n });
       return;
    }
    if (m < row) {
@@ -84,10 +85,6 @@ function draw() {
    let pathCountVariable = 1;
    for (let i = 0; i < directionInfo.length; i++) {
       setTimeout(() => {
-         if (directionInfo[i].direction == "reached" || ans > 0) {
-            pathCounter.value = pathCountVariable++;
-            ans--;
-         }
          if (directionInfo[i].direction == "down" || directionInfo[i].direction == "right") {
             const block = document.createElement("div");
             block.style.gridRowStart = directionInfo[i].row;
@@ -95,6 +92,7 @@ function draw() {
             block.classList.add("block");
             if (directionInfo[i].row == rowValue && directionInfo[i].col == colValue) {
                block.style.backgroundColor = "#ADD8E6";
+               pathCounter.value = pathCountVariable++;
             }
             grid.appendChild(block);
          } else if (directionInfo[i].direction === "left" || directionInfo[i].direction === "up") {
@@ -113,6 +111,7 @@ function draw() {
 }
 
 simulateButton.addEventListener("click", () => {
+   ans = 0;
    kev(1, 1, rowValue, colValue);
    counterDiv.style.display = "flex";
    // for debugging purposes.
