@@ -110,3 +110,12 @@ footer,
 #disclaimer #note {
    color: rgb(102, 21, 21);
 }
+
+@media (max-width: 40rem) {
+   #disclaimer {
+      width: 20rem;
+   }
+   main ul {
+      width: 20rem;
+   }
+}
