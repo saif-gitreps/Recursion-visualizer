@@ -24,7 +24,6 @@ enterButton.addEventListener("click", () => {
 });
 
 grid.addEventListener("click", (event) => {
-   console.dir(event);
    const rect = grid.getBoundingClientRect();
    const cellWidth = rect.width / 3;
    const cellHeight = rect.height / 3;
@@ -34,9 +33,6 @@ grid.addEventListener("click", (event) => {
 
    const row = Math.floor(clickY / cellHeight) + 1;
    const col = Math.floor(clickX / cellWidth) + 1;
-
-   // Display row and column values
-   console.log(`Clicked grid cell: Row ${row}, Column ${col}`);
 });
 
 simulateButton.addEventListener("click", () => {

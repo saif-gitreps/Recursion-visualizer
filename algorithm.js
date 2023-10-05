@@ -34,6 +34,8 @@ export function initialBlock() {
    grid.appendChild(firstBlockElement);
 }
 
+export function addSubBlocks() {}
+
 export function kev(m, n, row, col) {
    if (m == row && n == col) {
       return;
