@@ -93,6 +93,15 @@ footer,
    border: 2px solid black;
 }
 
+.preBlocks:hover {
+   background-color: rgb(58, 54, 54);
+}
+
+.obstacle {
+   background-color: rgb(239, 213, 13);
+   border: 2px solid black;
+}
+
 #disclaimer {
    margin-top: 5rem;
    width: 50rem;

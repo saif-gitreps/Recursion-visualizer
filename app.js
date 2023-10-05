@@ -1,4 +1,12 @@
-import { reduceHeight, reduceWidth, gridSizeAdjustment, kev, draw, initialBlock } from "./algorithm.js";
+import {
+   reduceHeight,
+   reduceWidth,
+   gridSizeAdjustment,
+   kev,
+   draw,
+   initialBlock,
+   addSubBlocks,
+} from "./algorithm.js";
 
 const rowInput = document.getElementById("row-input");
 const colInput = document.getElementById("col-input");
@@ -21,6 +29,7 @@ enterButton.addEventListener("click", () => {
    gridSizeAdjustment(rowValue, colValue);
    initialBlock();
    simulateButton.style.display = "block";
+   addSubBlocks();
 });
 
 grid.addEventListener("click", (event) => {

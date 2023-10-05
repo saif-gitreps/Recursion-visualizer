@@ -34,7 +34,17 @@ export function initialBlock() {
    grid.appendChild(firstBlockElement);
 }
 
-export function addSubBlocks() {}
+export function addSubBlocks() {
+   for (let i = 1; i <= rowValue; i++) {
+      for (let j = 1; j <= colValue; j++) {
+         const block = document.createElement("div");
+         block.style.gridRowStart = i;
+         block.style.gridAutoColumns = j;
+         block.classList.add("preBlocks");
+         grid.appendChild(block);
+      }
+   }
+}
 
 export function kev(m, n, row, col) {
    if (m == row && n == col) {
