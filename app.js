@@ -20,9 +20,11 @@ export const grid = document.querySelector("main ul");
 export let rowValue = rowInput.value;
 export let colValue = colInput.value;
 export let directionInfo = [];
+export let obstacleInfo = [];
 
 enterButton.addEventListener("click", () => {
    directionInfo = [];
+   obstacleInfo = [];
    pathCounter.value = 0;
    rowValue = parseInt(rowInput.value);
    colValue = parseInt(colInput.value);
@@ -36,16 +38,15 @@ grid.addEventListener("click", (event) => {
    const rect = grid.getBoundingClientRect();
    const clickX = event.clientX - rect.left;
    const clickY = event.clientY - rect.top;
-
-   console.log(rowValue);
-   console.log(colValue);
    const row = Math.floor((clickY / rect.height) * rowValue) + 1;
    const col = Math.floor((clickX / rect.width) * colValue) + 1;
-   console.log(`Clicked grid cell: Row ${row}, Column ${col}`);
+
+   obstacleInfo[row] = [];
+   obstacleInfo[row][col] = 1;
+
    const obstacleBlock = grid.querySelector(
       `.preBlocks[style*="grid-row-start: ${row}; grid-column-start: ${col};"]`
    );
-   console.log(obstacleBlock);
    if (obstacleBlock) {
       obstacleBlock.classList.remove("preBlocks");
       obstacleBlock.classList.add("obstacle");

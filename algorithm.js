@@ -1,4 +1,12 @@
-import { grid, rowValue, colValue, pathCounter, directionInfo, firstBlockElement } from "./app.js";
+import {
+   grid,
+   rowValue,
+   colValue,
+   pathCounter,
+   directionInfo,
+   firstBlockElement,
+   obstacleInfo,
+} from "./app.js";
 
 export function reduceWidth(width) {
    if (width > 45 && width < 60) {
@@ -48,8 +56,25 @@ export function addSubBlocks() {
       }
    }
 }
+export function removeObstacles() {
+   for (let i = 1; i <= rowValue; i++) {
+      for (let j = 1; j <= colValue; j++) {
+         if ((i == 1 && j == 1) || (i == rowValue && j == colValue)) {
+            continue;
+         }
+         const block = document.createElement("div");
+         block.style.gridRowStart = i;
+         block.style.gridColumnStart = j;
+         block.classList.add("preBlocks");
+         grid.appendChild(block);
+      }
+   }
+}
 
 export function kev(m, n, row, col) {
+   if (obstacleInfo[m][n] == 1) {
+      return;
+   }
    if (m == row && n == col) {
       return;
    }
