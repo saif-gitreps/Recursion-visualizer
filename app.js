@@ -34,20 +34,21 @@ enterButton.addEventListener("click", () => {
 
 grid.addEventListener("click", (event) => {
    const rect = grid.getBoundingClientRect();
-   const gridWidth = rect.width;
-   const gridHeight = rect.height;
-
    const clickX = event.clientX - rect.left;
    const clickY = event.clientY - rect.top;
 
-   const row = Math.floor((clickY / gridHeight) * rowValue) + 1;
-   const col = Math.floor((clickX / gridWidth) * colValue) + 1;
+   console.log(rowValue);
+   console.log(colValue);
+   const row = Math.floor((clickY / rect.height) * rowValue) + 1;
+   const col = Math.floor((clickX / rect.width) * colValue) + 1;
    console.log(`Clicked grid cell: Row ${row}, Column ${col}`);
    const obstacleBlock = grid.querySelector(
       `.preBlocks[style*="grid-row-start: ${row}; grid-column-start: ${col};"]`
    );
    console.log(obstacleBlock);
    if (obstacleBlock) {
+      obstacleBlock.classList.remove("preBlocks");
+      obstacleBlock.classList.add("obstacle");
    }
 });
 

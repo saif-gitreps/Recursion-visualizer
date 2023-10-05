@@ -37,6 +37,9 @@ export function initialBlock() {
 export function addSubBlocks() {
    for (let i = 1; i <= rowValue; i++) {
       for (let j = 1; j <= colValue; j++) {
+         if ((i == 1 && j == 1) || (i == rowValue && j == colValue)) {
+            continue;
+         }
          const block = document.createElement("div");
          block.style.gridRowStart = i;
          block.style.gridColumnStart = j;
