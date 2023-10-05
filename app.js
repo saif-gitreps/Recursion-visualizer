@@ -23,6 +23,22 @@ enterButton.addEventListener("click", () => {
    simulateButton.style.display = "block";
 });
 
+grid.addEventListener("click", (event) => {
+   console.dir(event);
+   const rect = grid.getBoundingClientRect();
+   const cellWidth = rect.width / 3;
+   const cellHeight = rect.height / 3;
+
+   const clickX = event.clientX - rect.left;
+   const clickY = event.clientY - rect.top;
+
+   const row = Math.floor(clickY / cellHeight) + 1;
+   const col = Math.floor(clickX / cellWidth) + 1;
+
+   // Display row and column values
+   console.log(`Clicked grid cell: Row ${row}, Column ${col}`);
+});
+
 simulateButton.addEventListener("click", () => {
    kev(1, 1, rowValue, colValue);
    counterDiv.style.display = "flex";
