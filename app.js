@@ -24,10 +24,12 @@ export let obstacleInfo = [];
 
 enterButton.addEventListener("click", () => {
    directionInfo = [];
-   obstacleInfo = [];
    pathCounter.value = 0;
    rowValue = parseInt(rowInput.value);
    colValue = parseInt(colInput.value);
+   for (let i = 1; i <= rowValue; i++) {
+      obstacleInfo[i] = [];
+   }
    gridSizeAdjustment(rowValue, colValue);
    initialBlock();
    simulateButton.style.display = "block";
@@ -40,10 +42,7 @@ grid.addEventListener("click", (event) => {
    const clickY = event.clientY - rect.top;
    const row = Math.floor((clickY / rect.height) * rowValue) + 1;
    const col = Math.floor((clickX / rect.width) * colValue) + 1;
-
-   obstacleInfo[row] = [];
    obstacleInfo[row][col] = 1;
-
    const obstacleBlock = grid.querySelector(
       `.preBlocks[style*="grid-row-start: ${row}; grid-column-start: ${col};"]`
    );

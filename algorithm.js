@@ -72,20 +72,17 @@ export function removeObstacles() {
 }
 
 export function kev(m, n, row, col) {
-   if (obstacleInfo[m][n] == 1) {
+   if ((m == row && n == col) || obstacleInfo[m][n] == 1) {
       return;
    }
-   if (m == row && n == col) {
-      return;
-   }
-   if (m < row) {
+   if (m < row && obstacleInfo[m + 1][n] != 1) {
       m += 1;
       directionInfo.push({ direction: "down", row: m, col: n });
       kev(m, n, row, col);
       directionInfo.push({ direction: "up", row: m, col: n });
       m -= 1;
    }
-   if (n < col) {
+   if (n < col && obstacleInfo[m][n + 1] != 1) {
       n += 1;
       directionInfo.push({ direction: "right", row: m, col: n });
       kev(m, n, row, col);
