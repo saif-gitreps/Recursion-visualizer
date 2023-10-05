@@ -51,6 +51,12 @@ export function addSubBlocks() {
          const block = document.createElement("div");
          block.style.gridRowStart = i;
          block.style.gridColumnStart = j;
+         const occupiedBlock = grid.querySelector(
+            `.preBlocks[style*="grid-row-start: ${i}; grid-column-start: ${j};"]`
+         );
+         if (occupiedBlock) {
+            grid.removeChild(occupiedBlock);
+         }
          block.classList.add("preBlocks");
          grid.appendChild(block);
       }
@@ -59,14 +65,15 @@ export function addSubBlocks() {
 export function removeObstacles() {
    for (let i = 1; i <= rowValue; i++) {
       for (let j = 1; j <= colValue; j++) {
-         if ((i == 1 && j == 1) || (i == rowValue && j == colValue)) {
+         if (i == 1 && j == 1) {
             continue;
          }
-         const block = document.createElement("div");
-         block.style.gridRowStart = i;
-         block.style.gridColumnStart = j;
-         block.classList.add("preBlocks");
-         grid.appendChild(block);
+         const obstacleBlock = grid.querySelector(
+            `.obstacle[style*="grid-row-start: ${i}; grid-column-start: ${j};"]`
+         );
+         if (obstacleBlock) {
+            obstacleBlock.classList.remove("obstacle");
+         }
       }
    }
 }

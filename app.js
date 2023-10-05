@@ -6,6 +6,7 @@ import {
    draw,
    initialBlock,
    addSubBlocks,
+   removeObstacles,
 } from "./algorithm.js";
 
 const rowInput = document.getElementById("row-input");
@@ -32,8 +33,9 @@ enterButton.addEventListener("click", () => {
    }
    gridSizeAdjustment(rowValue, colValue);
    initialBlock();
-   simulateButton.style.display = "block";
    addSubBlocks();
+   removeObstacles();
+   simulateButton.style.display = "block";
 });
 
 grid.addEventListener("click", (event) => {
