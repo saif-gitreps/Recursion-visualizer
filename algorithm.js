@@ -39,7 +39,7 @@ export function addSubBlocks() {
       for (let j = 1; j <= colValue; j++) {
          const block = document.createElement("div");
          block.style.gridRowStart = i;
-         block.style.gridAutoColumns = j;
+         block.style.gridColumnStart = j;
          block.classList.add("preBlocks");
          grid.appendChild(block);
       }
