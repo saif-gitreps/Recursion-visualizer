@@ -24,13 +24,13 @@ export let directionInfo = [];
 export let obstacleInfo = [];
 
 enterButton.addEventListener("click", () => {
-   for (let i = 1; i <= rowValue; i++) {
-      obstacleInfo[i] = [];
-   }
    directionInfo = [];
    pathCounter.value = 0;
    rowValue = parseInt(rowInput.value);
    colValue = parseInt(colInput.value);
+   for (let i = 1; i <= rowValue; i++) {
+      obstacleInfo[i] = [];
+   }
    gridSizeAdjustment(rowValue, colValue);
    initialBlock();
    addSubBlocks();
