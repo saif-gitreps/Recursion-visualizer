@@ -2,12 +2,12 @@ import {
    reduceHeight,
    reduceWidth,
    gridSizeAdjustment,
-   kev,
-   draw,
    initialBlock,
    addSubBlocks,
    removeObstacles,
-} from "./algorithm.js";
+} from "./grid-config.js";
+
+import { kev, draw } from "./algorithm.js";
 
 const rowInput = document.getElementById("row-input");
 const colInput = document.getElementById("col-input");
@@ -24,13 +24,13 @@ export let directionInfo = [];
 export let obstacleInfo = [];
 
 enterButton.addEventListener("click", () => {
+   for (let i = 1; i <= rowValue; i++) {
+      obstacleInfo[i] = [];
+   }
    directionInfo = [];
    pathCounter.value = 0;
    rowValue = parseInt(rowInput.value);
    colValue = parseInt(colInput.value);
-   for (let i = 1; i <= rowValue; i++) {
-      obstacleInfo[i] = [];
-   }
    gridSizeAdjustment(rowValue, colValue);
    initialBlock();
    addSubBlocks();
@@ -55,8 +55,8 @@ grid.addEventListener("click", (event) => {
 });
 
 simulateButton.addEventListener("click", () => {
-   kev(1, 1, rowValue, colValue);
    counterDiv.style.display = "flex";
-   draw();
    simulateButton.style.display = "none";
+   kev(1, 1, rowValue, colValue);
+   draw();
 });
